@@ -36,9 +36,7 @@ public:
 			temp = temp->next;
 		}
 		temp->next = p;
-		this->length = this->length + 1;
-//		(*this).length++;
-//		this->length = this->length + 1;
+		length++;
 	}
 	void deleteItem(const T data){
 		Node<T>* temp = head;
