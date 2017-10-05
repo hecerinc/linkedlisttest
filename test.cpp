@@ -17,7 +17,7 @@ using namespace std;
 
 // bool isEmpty()
 TEST_CASE("isEmpty operation correctly returns whether a list is empty", "[LinkedList]"){
-	LinkedList<int> a; // TODO: change declaration
+	LinkedList<int> a;
 	REQUIRE(a.isEmpty());
 	a.push_back(10);
 	a.push_back(20);
@@ -120,7 +120,6 @@ TEST_CASE("empty() correctly destroys the list and sets head to NULL", "[LinkedL
 }
 
 
-// TODO: check how to do this
 // FrontBackSplit()
 TEST_CASE("FrontBackSplit() correctly returns the two halves", "[LinkedList]") {
 	LinkedList<int> a;
