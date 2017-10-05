@@ -2,7 +2,7 @@
 
 These are the tests I use to unit test my implementation for LinkedLists.
 
-It uses (Catch)[https://github.com/philsquared/Catch] as a testing framework.
+It uses [Catch](https://github.com/philsquared/Catch) as a testing framework.
 
 
 ## How to run the tests
