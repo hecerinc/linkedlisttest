@@ -23,20 +23,22 @@ public:
 		}
 
 		head = NULL;
+		this->length = 0;
 	}
-	void push_back(T data){
+	void push_back(const T data){
 		Node<T>* p = new Node<T>(data);
 		// Assume we only have head
 		Node<T>* temp = head;
 		if(temp == NULL){
 			head = p;
+			this->length = 1;
 			return;
 		}
 		while(temp->next != NULL){
 			temp = temp->next;
 		}
 		temp->next = p;
-		length++;
+		this->length = this->length + 1;
 	}
 	void deleteItem(const T data){
 		Node<T>* temp = head;
@@ -58,7 +60,7 @@ public:
 		temp = prev = NULL;
 		length--;
 	}
-	T getItem(int index) {
+	T getItem(int index) const{
 		Node<T>* p = head;
 		int i = 0;
 		if(index > length-1){
@@ -94,8 +96,8 @@ public:
 		head = previous;
 	}
 	bool isEmpty(){return head == NULL;}
-	int size(){return length;}
-	void empty(){makeEmpty(); }
+	int size(){return this->length;}
+	void empty(){makeEmpty();}
 
 	void print(){
 		Node<T>* p = head;
@@ -108,12 +110,14 @@ public:
 		std::cout << std::endl;
 	}
 	void push(T newData){
+		this->length = this->length + 1;
 		LinkedList<T>::Push(&head, newData);
 	}
 	T pop(){
+		this->length = this->length - 1;
 		return LinkedList<T>::Pop(&head);
 	}
-	// T operator[](int i) const {return length;}
+	T operator[](int i) const {return this->getItem(i);}
 	// T& operator[](int i) {return 100;}
 	// T& operator[](unsigned int i){ return getItem(i);}
 	// const T& operator[](unsigned int i) const{ return getItem(i);}
@@ -124,6 +128,13 @@ public:
 	// Methods from Linked Lists Problems
 
 	static void FrontBackSplit(Node<T>** source, Node<T>** frontRef, Node<T>** backRef){
+		// TODO: handle 0 elmeents?
+		// Handle the case where there is only one element
+		if((*source)->next == NULL) { 
+			*frontRef = *source;
+			*backRef = *source;
+			return;
+		}
 		Node<T>* tmp = new Node<T>;
 		Node<T>* p = tmp;
 		Node<T>* f = tmp;

@@ -1,10 +1,9 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 #include "LinkedList.h"
+#include <iostream>
+using namespace std;
 
-unsigned int Factorial( unsigned int number ) {
-	return number <= 1 ? number : Factorial(number-1)*number;
-}
 // [] operator get
 // push_back
 // push
@@ -28,16 +27,15 @@ TEST_CASE("isEmpty operation correctly returns whether a list is empty", "[Linke
 
 // [] operator
 TEST_CASE("[] operator returns the correct value for position i", "[LinkedList]") {
-	// LinkedList<int> a;
-	// CHECK_THROWS(a.getItem(0));
-	// CHECK(a.getItem(0) == NULL);
-	// a.push_back(10);
-	// a.push_back(20);
-	// a.push_back(30);
-	// REQUIRE_THROWS(a.getItem(-)]);
-	// REQUIRE(a.getItem(2)== 30);
-	// REQUIRE(a.getItem(1) == 20);
-	// REQUIRE(a.getItem(0) == 10);
+	LinkedList<int> a;
+	CHECK_THROWS(a[0]);
+	a.push_back(10);
+	a.push_back(20);
+	a.push_back(30);
+	REQUIRE_THROWS(a[-1]);
+	REQUIRE(a[2]== 30);
+	REQUIRE(a[1] == 20);
+	REQUIRE(a[0] == 10);
 }
 
 // void push_back(int)
@@ -47,13 +45,13 @@ TEST_CASE("push_back() correctly appends to the end of the list", "[LinkedList]"
 	a.push_back(10);
 	REQUIRE(a.length == 1);
 	REQUIRE(a.head != NULL);
-	REQUIRE(a.getItem(0) == 10);
+	REQUIRE(a[0] == 10);
 	a.push_back(20);
-	REQUIRE(a.getItem(1) == 20);
+	REQUIRE(a[1] == 20);
 	a.push_back(30);
-	REQUIRE(a.getItem(2) == 30);
+	REQUIRE(a[2] == 30);
 	a.push_back(40);
-	REQUIRE(a.getItem(3) == 40);
+	REQUIRE(a[3] == 40);
 	REQUIRE(a.size() == 4);
 	a.push_back(50);
 	a.push_back(60);
@@ -103,7 +101,7 @@ TEST_CASE("size() returns the correct size of the list", "[LinkedList]") {
 	a.push(10);
 	REQUIRE(a.size() == 8);
 	a.push(9);
-	REQUIRE(a.size() == 8);
+	REQUIRE(a.size() == 9);
 	a.empty();
 	REQUIRE(a.size() == 0);
 }
@@ -142,14 +140,16 @@ TEST_CASE("FrontBackSplit() correctly returns the two halves", "[LinkedList]") {
 	REQUIRE(y->next->next == NULL);
 
 	// Case for length() == 1
+	// cout << "FBSplit: Handle the case when length is 1 (both should point to the head)." << endl;
 	a.empty();
 	a.push_back(10);
 	a.frontBackSplit(&x, &y);
+	
 	REQUIRE(x->data == 10);
+	REQUIRE(x == y);
 	REQUIRE(y->data == 10);
 	REQUIRE(x->next == NULL);
 	REQUIRE(y->next == NULL);
-	REQUIRE(x == y);
 
 	// Clean up
 	delete x;
@@ -174,20 +174,20 @@ TEST_CASE("FrontBackSplit(): in odd-numbered lists the extra element is in the f
 
 }
 
-// void insertAtIndex(int, int)
-// TEST_CASE("insertAtIndex(i) correctly inserts a new item at position i \n(provided i is in the range [0, length])", "[LinkedList]") {
-// 	LinkedList<int> a;
-// 	a.push_back(10);
-// 	a.insertAtIndex(1, 20);
-// 	REQUIRE(a.size() == 2);
-// 	REQUIRE(a.getItem(1) == 20);
-// 	a.insertAtIndex(1, 15);
-// 	REQUIRE(a.size() == 3);
-// 	REQUIRE(a.getItem(1) == 15);
-// 	a.insertAtIndex(0, 200);
-// 	REQUIRE(a.getItem(0) == 200);
-// 	REQUIRE(a.first() == 200);
-// }
+void insertAtIndex(int, int)
+TEST_CASE("insertAtIndex(i) correctly inserts a new item at position i \n(provided i is in the range [0, length])", "[LinkedList]") {
+	LinkedList<int> a;
+	a.push_back(10);
+	a.insertAtIndex(1, 20);
+	REQUIRE(a.size() == 2);
+	REQUIRE(a[1] == 20);
+	a.insertAtIndex(1, 15);
+	REQUIRE(a.size() == 3);
+	REQUIRE(a[1] == 15);
+	a.insertAtIndex(0, 200);
+	REQUIRE(a[0] == 200);
+	REQUIRE(a.first() == 200);
+}
 
 // int pop()
 TEST_CASE("pop() correctly returns the first element", "[LinkedList]") {
