@@ -173,7 +173,7 @@ TEST_CASE("FrontBackSplit(): in odd-numbered lists the extra element is in the f
 
 }
 
-void insertAtIndex(int, int)
+// void insertAtIndex(int, int)
 TEST_CASE("insertAtIndex(i) correctly inserts a new item at position i \n(provided i is in the range [0, length])", "[LinkedList]") {
 	LinkedList<int> a;
 	a.push_back(10);
