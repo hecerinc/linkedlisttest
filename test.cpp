@@ -105,8 +105,8 @@ TEST_CASE("size() returns the correct size of the list", "[LinkedList]") {
 	REQUIRE(a.size() == 0);
 }
 
-// void empty()
-TEST_CASE("empty() correctly destroys the list and sets head to NULL", "[LinkedList]") {
+// void makeEmpty()
+TEST_CASE("makeEmpty() correctly destroys the list and sets head to NULL", "[LinkedList]") {
 	LinkedList<int> a;
 	a.push_back(10);	
 	a.push_back(20);	

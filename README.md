@@ -22,8 +22,16 @@ That's it!
 
 ## Current tests
 
-- `insertAtIndex(int)`
-
+- `insertAtIndex(int, T)`
+- `isEmpty(void)`
+- `[] operator` (get version)
+- `push_back(T)`
+- `push(T)`: adds value T to the beginning of the list
+- `first(void)`: returns the first element of the list
+- `size(void)`: returns the length of the list
+- `makeEmpty(void)`: empties the list (deleting everything)
+- `frontBackSplit(Node<T>** a, Node<T>** b)`: places the first half of the list in a, and the second half in b.
+- `pop(void)`: returns and removes the first element on the list
 
 ## Assumptions
 
