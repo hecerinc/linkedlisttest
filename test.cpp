@@ -41,10 +41,10 @@ TEST_CASE("[] operator returns the correct value for position i", "[LinkedList]"
 // void push_back(int)
 TEST_CASE("push_back() correctly appends to the end of the list", "[LinkedList]") {
 	LinkedList<int> a;
-	REQUIRE(a.root == NULL);
+	REQUIRE(a.head == NULL);
 	a.push_back(10);
 	REQUIRE(a.length == 1);
-	REQUIRE(a.root != NULL);
+	REQUIRE(a.head != NULL);
 	REQUIRE(a[0] == 10);
 	a.push_back(20);
 	REQUIRE(a[1] == 20);
@@ -68,18 +68,18 @@ TEST_CASE("push() correctly adds to the beginning of the list", "[LinkedList]") 
 	a.push(20);
 	REQUIRE(a.first() == 20);
 	a.push(30);
-	REQUIRE(a.root->data == 30);
+	REQUIRE(a.head->data == 30);
 	REQUIRE(a.size() == 3);
 }
 
 // int first()
 TEST_CASE("first() returns the first element of the list", "[LinkedList]") {
 	LinkedList<int> a;
-	REQUIRE(a.root == NULL);
+	REQUIRE(a.head == NULL);
 	a.push_back(10);
-	REQUIRE(a.root->data == a.first());	
+	REQUIRE(a.head->data == a.first());	
 	a.push_back(20);
-	REQUIRE(a.root->data == a.first());	
+	REQUIRE(a.head->data == a.first());	
 }
 
 // int size()
@@ -107,16 +107,16 @@ TEST_CASE("size() returns the correct size of the list", "[LinkedList]") {
 }
 
 // void empty()
-TEST_CASE("empty() correctly destroys the list and sets root to NULL", "[LinkedList]") {
+TEST_CASE("empty() correctly destroys the list and sets head to NULL", "[LinkedList]") {
 	LinkedList<int> a;
 	a.push_back(10);	
 	a.push_back(20);	
 	a.push_back(30);	
-	REQUIRE(a.root != NULL);
+	REQUIRE(a.head != NULL);
 	REQUIRE(a.size() != 0);
 	a.makeEmpty();
 	REQUIRE(a.size() == 0);
-	REQUIRE(a.root == NULL);
+	REQUIRE(a.head == NULL);
 }
 
 
@@ -128,8 +128,7 @@ TEST_CASE("FrontBackSplit() correctly returns the two halves", "[LinkedList]") {
 	a.push_back(30);
 	a.push_back(40);
 	// General test case for even-numbered lists
-	node<int> *x = new node<int>();
-	node<int> *y = new node<int>();
+	Node<int> *x, *y; 
 	a.frontBackSplit(&x, &y);
 	REQUIRE(x->data == 10);
 	REQUIRE(x->next->data == 20);
@@ -139,7 +138,7 @@ TEST_CASE("FrontBackSplit() correctly returns the two halves", "[LinkedList]") {
 	REQUIRE(y->next->next == NULL);
 
 	// Case for length() == 1
-	// cout << "FBSplit: Handle the case when length is 1 (both should point to the root)." << endl;
+	// cout << "FBSplit: Handle the case when length is 1 (both should point to the head)." << endl;
 	a.makeEmpty();
 	a.push_back(10);
 	a.frontBackSplit(&x, &y);
@@ -151,8 +150,6 @@ TEST_CASE("FrontBackSplit() correctly returns the two halves", "[LinkedList]") {
 	REQUIRE(y->next == NULL);
 
 	// Clean up
-	delete x;
-	delete y;
 	x = NULL;
 	y = NULL;
 
@@ -162,8 +159,7 @@ TEST_CASE("FrontBackSplit(): in odd-numbered lists the extra element is in the f
 	a.push_back(10);
 	a.push_back(20);
 	a.push_back(30);
-	node<int> * x = new node<int>();
-	node<int> * y = new node<int>();
+	Node<int> * x, *y;
 
 	a.frontBackSplit(&x, &y);
 	REQUIRE(x->data == 10);
