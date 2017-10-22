@@ -43,7 +43,6 @@ TEST_CASE("push_back() correctly appends to the end of the list", "[LinkedList]"
 	LinkedList<int> a;
 	REQUIRE(a.head == NULL);
 	a.push_back(10);
-	REQUIRE(a.length == 1);
 	REQUIRE(a.head != NULL);
 	REQUIRE(a[0] == 10);
 	a.push_back(20);

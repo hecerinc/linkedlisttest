@@ -17,6 +17,18 @@ $ g++ test.cpp -o test
 $ ./test
 ```
 
-
 That's it!
+
+
+## Current tests
+
+- `insertAtIndex(int)`
+
+
+## Assumptions
+
+- The tests assume your linked list class is called `LinkedList` and your linked list node is called `Node`.
+- The tests assume you're using templates `<T>`
+- You're exposing your linked list head in a `public` `head` attribute in your class
+
 
